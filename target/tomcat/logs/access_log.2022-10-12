@@ -1,0 +1,5 @@
+0:0:0:0:0:0:0:1 - - [12/Oct/2022:20:09:59 +0800] "GET /niuzhuang_1031A HTTP/1.1" 302 - http-bio-8088-exec-1 0
+0:0:0:0:0:0:0:1 - - [12/Oct/2022:20:09:59 +0800] "GET /niuzhuang_1031A/ HTTP/1.1" 302 - http-bio-8088-exec-3 49
+0:0:0:0:0:0:0:1 - - [12/Oct/2022:20:10:00 +0800] "GET /niuzhuang_1031A/car/findAll.do;jsessionid=C213B0357DB4519AEE6525FB01C29A30 HTTP/1.1" 200 4166 http-bio-8088-exec-4 801
+0:0:0:0:0:0:0:1 - - [12/Oct/2022:20:10:00 +0800] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8088-exec-5 0
+0:0:0:0:0:0:0:1 - - [12/Oct/2022:20:10:08 +0800] "POST /niuzhuang_1031A/car/findAll.do HTTP/1.1" 200 4182 http-bio-8088-exec-6 45

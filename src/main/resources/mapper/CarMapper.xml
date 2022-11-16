@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lening.mapper.CarMapper">
+  <resultMap id="BaseResultMap" type="com.lening.entity.CarBean">
+    <id column="carid" jdbcType="INTEGER" property="carid" />
+    <result column="carname" jdbcType="VARCHAR" property="carname" />
+    <result column="buydate" jdbcType="DATE" property="buydate" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="userurl" jdbcType="VARCHAR" property="userurl" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    carid, carname, buydate, address, cid, userurl
+  </sql>
+  <select id="selectByExample" parameterType="com.lening.entity.CarBeanExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_car
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_car
+    where carid = #{carid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_car
+    where carid = #{carid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lening.entity.CarBeanExample">
+    delete from t_car
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lening.entity.CarBean">
+    insert into t_car (carid, carname, buydate, 
+      address, cid, userurl
+      )
+    values (#{carid,jdbcType=INTEGER}, #{carname,jdbcType=VARCHAR}, #{buydate,jdbcType=DATE}, 
+      #{address,jdbcType=VARCHAR}, #{cid,jdbcType=INTEGER}, #{userurl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lening.entity.CarBean">
+    insert into t_car
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="carid != null">
+        carid,
+      </if>
+      <if test="carname != null">
+        carname,
+      </if>
+      <if test="buydate != null">
+        buydate,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="userurl != null">
+        userurl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="carid != null">
+        #{carid,jdbcType=INTEGER},
+      </if>
+      <if test="carname != null">
+        #{carname,jdbcType=VARCHAR},
+      </if>
+      <if test="buydate != null">
+        #{buydate,jdbcType=DATE},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null">
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="userurl != null">
+        #{userurl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lening.entity.CarBeanExample" resultType="java.lang.Long">
+    select count(*) from t_car
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_car
+    <set>
+      <if test="record.carid != null">
+        carid = #{record.carid,jdbcType=INTEGER},
+      </if>
+      <if test="record.carname != null">
+        carname = #{record.carname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buydate != null">
+        buydate = #{record.buydate,jdbcType=DATE},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cid != null">
+        cid = #{record.cid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userurl != null">
+        userurl = #{record.userurl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_car
+    set carid = #{record.carid,jdbcType=INTEGER},
+      carname = #{record.carname,jdbcType=VARCHAR},
+      buydate = #{record.buydate,jdbcType=DATE},
+      address = #{record.address,jdbcType=VARCHAR},
+      cid = #{record.cid,jdbcType=INTEGER},
+      userurl = #{record.userurl,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lening.entity.CarBean">
+    update t_car
+    <set>
+      <if test="carname != null">
+        carname = #{carname,jdbcType=VARCHAR},
+      </if>
+      <if test="buydate != null">
+        buydate = #{buydate,jdbcType=DATE},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null">
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="userurl != null">
+        userurl = #{userurl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where carid = #{carid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lening.entity.CarBean">
+    update t_car
+    set carname = #{carname,jdbcType=VARCHAR},
+      buydate = #{buydate,jdbcType=DATE},
+      address = #{address,jdbcType=VARCHAR},
+      cid = #{cid,jdbcType=INTEGER},
+      userurl = #{userurl,jdbcType=VARCHAR}
+    where carid = #{carid,jdbcType=INTEGER}
+  </update>
+</mapper>
